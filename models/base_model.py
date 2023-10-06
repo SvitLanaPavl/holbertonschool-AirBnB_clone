@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """The BaseModel Module"""
+import models
 import uuid
 from datetime import datetime
 
@@ -7,11 +8,25 @@ from datetime import datetime
 class BaseModel:
     """BaseModel class documentation"""
 
-    def __init__(self):
-        """The constructor method"""
+    def __init__(self, *args, **kwargs):
+        """The constructor method
+        
+        Arguments:
+        *args: not used
+        **kwargs: dictionary representation
+        """
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = self.created_at
+        if kwargs is not None and kwargs != {}:
+            for key, value in kwargs.items():
+                if key != "__class__":
+                    if key in ["created at", "updated at"]:
+                        setattr(self, key, datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f"))
+                    else:
+                        setattr(self, key, value)
+        else:
+            models.storage.new(self)
 
     def __str__(self):
         """String representation"""
@@ -20,6 +35,7 @@ class BaseModel:
     def save(self):
         """Updates the public instance attribute"""
         self.updated_at = datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """Returns a dictionary containing ke/values of __dict__"""
