@@ -25,12 +25,8 @@ class FileStorage:
     def save(self):
         """serializes __objects to the JSON file"""
         # collects the serialized data of each object
-        dict_obj = {}
-        # each key is unique identifier of an object
-        for key in self.__objects:
-            # accessing the corresponding object and return dict
-            dict_obj[key] = self.__objects[key].to_dict()
-            # writing the dictionary to json file
+        objs = self.__objects
+        dict_obj = {key: objs[key].to_dict() for key in objs.keys()}
         with open(self.__file_path, "w") as json_file:
             json.dump(dict_obj, json_file)
 
@@ -39,20 +35,10 @@ class FileStorage:
         try:
             with open(self.__file_path, "r") as json_file:
                 # stores the deserialized JSON data
-                dict_obj = {}
-                """
-                reads the contents of the JSON file,
-                parses it and loads onto the dict_new"""
-                json.loads(json_file.read())
-                # each key is a unique identifier for an object
-                for key, value in dict_obj.items():
-                    # check if the key does not exist
-                    if key not in self.__objects.keys():
-                        # create a new instance of the class
-                        class_name = value["__class__"]
-                        # create the new instance of the class
-                        obj = eval(f"{class_name}(**value)")
-                        # adding the object to the dictionary
-                        self.__objects[key] = obj
+                dict_obj = json.load(json_file)
+                for value in dict_obj.values():
+                    class_name = value["__class__"]
+                    del value["__class__"]
+                    self.new(eval(class_name)(**value))
         except IOError:
             pass
