@@ -17,12 +17,14 @@ class TestBaseModelInit(unittest.TestCase):
 
     def test_base_model_constructor(self):
         """ Testing Constructor """
-        self.assertNotEqual(self.b1.created_at, self.b1.updated_at)
-        self.assertNotEqual(self.b2.created_at, self.b2.updated_at)
+        self.assertEqual(self.b1.created_at, self.b1.updated_at)
+        self.assertEqual(self.b2.created_at, self.b2.updated_at)
         self.assertNotEqual(self.b1.created_at, self.b2.created_at)
         self.assertNotEqual(self.b1.updated_at, self.b2.updated_at)
         self.assertEqual(len(self.b1.id), 36)
         self.assertTrue(type(self.b1.id), str)
+        self.assertTrue(type(self.b1.created_at), str)
+        self.assertTrue(type(self.b1.updated_at), str)
         with self.assertRaises(TypeError):
             BaseModel(1)
 
