@@ -1,8 +1,7 @@
 #!/usr/bin/python3
-"""File storage instance module"""
+"""File storage __init__ method"""
 from models.engine.file_storage import FileStorage
-from models.base_model import BaseModel
 
 # instance of FileStorage
-storage = FileStorage()
-storage.reload()
+storage = FileStorage() # creates new FileStorage instance
+storage.reload() # loads objects from the json file
