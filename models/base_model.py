@@ -10,7 +10,7 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         """The constructor method
-        
+
         Arguments:
         *args: not used
         **kwargs: dictionary representation
