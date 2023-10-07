@@ -8,9 +8,21 @@ from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from datetime import datetime
 
-class TestFileStorageInit(unittest.TestCase):
+class TestFileStorageAttributes(unittest.TestCase):
     """Testing basic instantiation and private class attributes"""
 
+    def test_init_with_args(self):
+        """trying to instantiate with args"""
+        with self.assertRaises(TypeError):
+            FileStorage(None)
+
+    def test_file_path_type(self):
+        """testing the type of the file path"""
+        self.assertEqual(type(FileStorage._FileStorage__file_path), str)
+
+    def test_objects_type(self):
+        """testing the type of the file path"""
+        self.assertEqual(type(FileStorage._FileStorage__objects), dict)
 
 class TestFileStorageMethods(unittest.TestCase):
     """Testing file storage methods"""
