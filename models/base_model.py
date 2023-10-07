@@ -15,15 +15,15 @@ class BaseModel:
         *args: not used
         **kwargs: dictionary representation
         """
-        form = "%Y-%m-%dT%H:%M:%S.%f"
+        format = "%Y-%m-%dT%H:%M:%S.%f"
         self.id = str(uuid.uuid4())
         self.created_at = datetime.now()
         self.updated_at = self.created_at
         if kwargs is not None and kwargs != {}:
             for key, value in kwargs.items():
                 if key != "__class__":
-                    if key in ["created at", "updated at"]:
-                        setattr(self, key, datetime.strptime(value, form))
+                    if key in ["created_at", "updated_at"]:
+                        setattr(self, key, datetime.strptime(value, format))
                     else:
                         setattr(self, key, value)
         else:
