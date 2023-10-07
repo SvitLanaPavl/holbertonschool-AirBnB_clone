@@ -2,6 +2,7 @@
 """File storage module"""
 import json
 from models.base_model import BaseModel
+from datetime import datetime
 
 
 class FileStorage:
@@ -15,44 +16,30 @@ class FileStorage:
 
     def all(self):
         """Returns a dictionary __objects"""
-        return self.__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """Adds a new object to the dictionary of objects"""
         key = f"{obj.__class__.__name__}.{obj.id}"
-        self.__objects[key] = obj
+        FileStorage.__objects[key] = obj
 
     def save(self):
         """serializes __objects to the JSON file"""
         # collects the serialized data of each object
-        dict_obj = {}
-        # each key is unique identifier of an object
-        for key in self.__objects:
-            # accessing the corresponding object and return dict
-            dict_obj[key] = self.__objects[key].to_dict()
-            # writing the dictionary to json file
-        with open(self.__file_path, "w") as json_file:
-            json.dump(dict_obj, json_file)
+        dict_obj = FileStorage.__objects
+        j_dict_obj = {obj: dict_obj[obj].to_dict() for obj in dict_obj.keys()}
+        with open(FileStorage.__file_path, "w") as json_file:
+            json.dump(j_dict_obj, json_file)
 
     def reload(self):
         """deserializes the JSON file to __objects"""
         try:
-            with open(self.__file_path, "r") as json_file:
+            with open(FileStorage.__file_path, "r") as json_file:
                 # stores the deserialized JSON data
-                dict_obj = {}
-                """
-                reads the contents of the JSON file,
-                parses it and loads onto the dict_new"""
-                json.loads(json_file.read())
-                # each key is a unique identifier for an object
-                for key, value in dict_obj.items():
-                    # check if the key does not exist
-                    if key not in self.__objects.keys():
-                        # create a new instance of the class
-                        class_name = value["__class__"]
-                        # create the new instance of the class
-                        obj = eval(f"{class_name}(**value)")
-                        # adding the object to the dictionary
-                        self.__objects[key] = obj
+                dict_obj = json.load(json_file)
+                for value in dict_obj.values():
+                    class_name = value["__class__"]
+                    del value["__class__"]
+                    self.new(eval(class_name)(**value))
         except IOError:
             pass
