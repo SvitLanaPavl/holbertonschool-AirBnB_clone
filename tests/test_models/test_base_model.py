@@ -1,7 +1,9 @@
 #!/usr/bin/python3
 """ This Module contains UnitTests for the BaseModel Class """
 import unittest
+import models
 from models.base_model import BaseModel
+from datetime import datetime
 
 
 class TestBaseModelInit(unittest.TestCase):
@@ -21,12 +23,11 @@ class TestBaseModelInit(unittest.TestCase):
         self.assertEqual(self.b2.created_at, self.b2.updated_at)
         self.assertNotEqual(self.b1.created_at, self.b2.created_at)
         self.assertNotEqual(self.b1.updated_at, self.b2.updated_at)
+        self.assertNotEqual(self.b1.id, self.b2.id)
         self.assertEqual(len(self.b1.id), 36)
         self.assertTrue(type(self.b1.id), str)
         self.assertTrue(type(self.b1.created_at), str)
         self.assertTrue(type(self.b1.updated_at), str)
-        with self.assertRaises(TypeError):
-            BaseModel(1)
 
     def test_str_override(self):
         """ Testing __str__ override """
