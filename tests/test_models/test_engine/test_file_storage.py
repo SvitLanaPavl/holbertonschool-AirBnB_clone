@@ -53,6 +53,11 @@ class TestFileStorageMethods(unittest.TestCase):
         key = f"{new_obj.__class__.__name__}.{new_obj.id}"
         self.assertIn(key, self.storage.all())
 
+    def test_new_more_args(self):
+        """testing new() by passing more args"""
+        with self.assertRaises(TypeError):
+            self.storage.new(BaseModel(), 1)
+
     def test_save_and_reload(self):
         """Testing save() and reload() methods"""
         new_storage = BaseModel()
