@@ -7,6 +7,7 @@ import models
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from datetime import datetime
+from models import storage
 
 
 class TestFileStorageAttributes(unittest.TestCase):
@@ -16,6 +17,10 @@ class TestFileStorageAttributes(unittest.TestCase):
         """trying to instantiate with args"""
         with self.assertRaises(TypeError):
             FileStorage(None)
+
+    def test_instantiation(self):
+        """testing for the class name"""
+        self.assertEqual(type(storage).__name__, "FileStorage")
 
     def test_file_path_type(self):
         """testing the type of the file path"""
