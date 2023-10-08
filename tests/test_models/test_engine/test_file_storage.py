@@ -58,6 +58,11 @@ class TestFileStorageMethods(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.storage.new(BaseModel(), 1)
 
+    def test_new_None(self):
+        """testing new() by passing None"""
+        with self.assertRaises(AttributeError):
+            self.storage.new(None)
+
     def test_save_and_reload(self):
         """Testing save() and reload() methods"""
         new_storage = BaseModel()
