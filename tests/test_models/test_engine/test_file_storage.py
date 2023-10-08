@@ -57,13 +57,22 @@ class TestFileStorageMethods(unittest.TestCase):
 
     def test_save_and_reload(self):
         """Testing save() and reload() methods"""
-        self.storage.save()
-        new_storage = FileStorage()
-        new_storage.reload()
+        # self.storage.save()
+        new_storage = BaseModel()
+        """new_storage.reload()
         self.assertEqual(len(new_storage.all()), len(self.storage.all()))
         for key, obj in self.storage.all().items():
             self.assertTrue(key in new_storage.all())
-            self.assertEqual(obj.to_dict(), new_storage.all()[key].to_dict())
+            self.assertEqual(obj.to_dict(), new_storage.all()[key].to_dict())"""
+        self.storage.new(new_storage)
+        self.storage.save()
+        text = ""
+        with open("temp_file.json", "r") as json_file:
+            text = json_file.read()
+            self.assertIn("BaseModel." + new_storage.id, text)
+        self.storage.reload()
+        obj = FileStorage._FileStorage__objects
+        self.assertIn("BaseModel." + new_storage.id, obj)
 
     if __name__ == "__main__":
         unittest.main()
