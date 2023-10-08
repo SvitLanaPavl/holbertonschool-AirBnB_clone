@@ -47,6 +47,11 @@ class TestFileStorageMethods(unittest.TestCase):
         self.assertIsInstance(all_obj, dict)
         self.assertIn(self.obj_1, all_obj.values())
 
+    def test_all_None(self):
+        """testing new() by passing None"""
+        with self.assertRaises(TypeError):
+            self.storage.all(None)
+
     def test_new(self):
         """Testing new() method"""
         new_obj = BaseModel()
