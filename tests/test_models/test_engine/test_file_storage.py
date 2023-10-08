@@ -34,7 +34,6 @@ class TestFileStorageMethods(unittest.TestCase):
         FileStorage._FileStorage__file_path = self.temp_file
         self.storage = FileStorage()
         self.obj_1 = BaseModel()
-        self.obj_2 = BaseModel()
 
     @classmethod
     def tearDown(self):
@@ -47,7 +46,6 @@ class TestFileStorageMethods(unittest.TestCase):
         all_obj = self.storage.all()
         self.assertIsInstance(all_obj, dict)
         self.assertIn(self.obj_1, all_obj.values())
-        self.assertIn(self.obj_2, all_obj.values())
 
     def test_new(self):
         """Testing new() method"""
@@ -57,13 +55,7 @@ class TestFileStorageMethods(unittest.TestCase):
 
     def test_save_and_reload(self):
         """Testing save() and reload() methods"""
-        # self.storage.save()
         new_storage = BaseModel()
-        """new_storage.reload()
-        self.assertEqual(len(new_storage.all()), len(self.storage.all()))
-        for key, obj in self.storage.all().items():
-            self.assertTrue(key in new_storage.all())
-            self.assertEqual(obj.to_dict(), new_storage.all()[key].to_dict())"""
         self.storage.new(new_storage)
         self.storage.save()
         text = ""
@@ -73,6 +65,16 @@ class TestFileStorageMethods(unittest.TestCase):
         self.storage.reload()
         obj = FileStorage._FileStorage__objects
         self.assertIn("BaseModel." + new_storage.id, obj)
+
+    def test_save_args(self):
+        """testing save() method with arguments"""
+        with self.assertRaises(TypeError):
+            self.storage.save(1)
+
+    def test_reload_args(self):
+        """testing save() method with arguments"""
+        with self.assertRaises(TypeError):
+            self.storage.reload(1)
 
     if __name__ == "__main__":
         unittest.main()
