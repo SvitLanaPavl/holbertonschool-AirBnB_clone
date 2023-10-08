@@ -55,13 +55,15 @@ class TestFileStorageMethods(unittest.TestCase):
         key = f"{new_obj.__class__.__name__}.{new_obj.id}"
         self.assertIn(key, self.storage.all())
 
-    """def test_save_and_relod(self):
-    Testing save() and reload() methods
+    def test_save_and_reload(self):
+        """Testing save() and reload() methods"""
         self.storage.save()
-        new = FileStorage()
-        new.reload()
-        self.assertIn(self.obj_1, new.all().keys())
-        self.assertIn(self.obj_2, new.all().keys())"""
+        new_storage = FileStorage()
+        new_storage.reload()
+        self.assertEqual(len(new_storage.all()), len(self.storage.all()))
+        for key, obj in self.storage.all().items():
+            self.assertTrue(key in new_storage.all())
+            self.assertEqual(obj.to_dict(), new_storage.all()[key].to_dict())
 
     if __name__ == "__main__":
         unittest.main()
