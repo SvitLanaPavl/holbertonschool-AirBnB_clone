@@ -8,6 +8,7 @@ from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from datetime import datetime
 
+
 class TestFileStorageAttributes(unittest.TestCase):
     """Testing basic instantiation and private class attributes"""
 
@@ -23,6 +24,7 @@ class TestFileStorageAttributes(unittest.TestCase):
     def test_objects_type(self):
         """testing the type of the file path"""
         self.assertEqual(type(FileStorage._FileStorage__objects), dict)
+
 
 class TestFileStorageMethods(unittest.TestCase):
     """Testing file storage methods"""
