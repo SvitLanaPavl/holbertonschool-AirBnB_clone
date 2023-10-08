@@ -76,10 +76,20 @@ class TestFileStorageMethods(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.storage.save(1)
 
+    def test_save_None(self):
+        """testing save() method with passing None"""
+        with self.assertRaises(TypeError):
+            self.storage.save(None)
+
     def test_reload_args(self):
-        """testing save() method with arguments"""
+        """testing reload() method with arguments"""
         with self.assertRaises(TypeError):
             self.storage.reload(1)
+
+    def test_reload_None(self):
+        """testing reload() method with arguments"""
+        with self.assertRaises(TypeError):
+            self.storage.reload(None)
 
     if __name__ == "__main__":
         unittest.main()
