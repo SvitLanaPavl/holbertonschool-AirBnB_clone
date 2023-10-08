@@ -17,6 +17,8 @@ class TestFileStorageAttributes(unittest.TestCase):
         """trying to instantiate with args"""
         with self.assertRaises(TypeError):
             FileStorage(None)
+        with self.assertRaises(TypeError):
+            FileStorage(1)
 
     def test_instantiation(self):
         """testing for the class name"""
@@ -59,13 +61,18 @@ class TestFileStorageMethods(unittest.TestCase):
         with self.assertRaises(TypeError):
             self.storage.all(None)
 
+    def test_all_excess_args(self):
+        """testing new() by passing None"""
+        with self.assertRaises(TypeError):
+            self.storage.all(1)
+
     def test_new(self):
         """Testing new() method"""
         new_obj = BaseModel()
         key = f"{new_obj.__class__.__name__}.{new_obj.id}"
         self.assertIn(key, self.storage.all())
 
-    def test_new_more_args(self):
+    def test_new_excess_args(self):
         """testing new() by passing more args"""
         with self.assertRaises(TypeError):
             self.storage.new(BaseModel(), 1)
