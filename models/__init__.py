@@ -3,5 +3,5 @@
 from models.engine.file_storage import FileStorage
 
 # instance of FileStorage
-storage = FileStorage() # creates new FileStorage instance
-storage.reload() # loads objects from the json file
+storage = FileStorage()  # creates new FileStorage instance
+storage.reload()  # loads objects from the json file
