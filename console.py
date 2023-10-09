@@ -132,7 +132,7 @@ class HBNBCommand(cmd.Cmd):
 
     # Cmd Class Overrides
     def default(self, line):
-        """ This method determines CLI behavior
+        """ This method determines CLI behavior\
             when 'quit' or 'EOF' are encountered in args """
         if line == "quit" or line == "EOF":
             return True
