@@ -2,21 +2,21 @@
 
 <img src='https://camo.githubusercontent.com/a8cd2eef2325c425519095dc2501111e630a77eddb454938c527cb82ea9c3aeb/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f696e7472616e65742d70726f6a656374732d66696c65732f686f6c626572746f6e7363686f6f6c2d6869676865722d6c6576656c5f70726f6772616d6d696e672b2f3236332f4842544e2d68626e622d46696e616c2e706e67' alt='HBnB'/>
 
-## **_Introduction_** 📢
+## _Introduction_ 📢
 
 **The AirBnb Clone project console** serves as a versatile developer tool designed for efficient management of objects and data through a command-line interface (CLI). It offers a range of functionalities including creating, updating, destroying, and displaying objects/data. One of its key features is the seamless storage and persistence of objects to a JSON file. This tool is instrumental in abstracting the interaction between the storage engine and object/data management, thereby providing flexibility to easily switch between different storage types.
 
 The primary objective of this project is to develop a _data model, a command interpreter, and a JSON file storage system_. When these components are integrated, they enable users to effectively maintain the file storage engine while executing various operations on the objects stored within the system, all through a user-friendly CLI.
 
-## **_The flowchart of the Program_** ⚡
+## _The flowchart of the Program_ ⚡
 
 <a href="https://ibb.co/yYQDtXh"><img src="https://i.ibb.co/KLrYdXN/flowchart-console.png" alt="flowchart-console" border="0"></a>
 
-## **_The file structure_** 📔
+## _The file structure_ 📔
 
 <a href="https://ibb.co/WFDpRFw"><img src="https://i.ibb.co/Y8DTV8M/file-structure.png" alt="file-structure" border="0"></a>
 
-## **_Description_** ✍
+## _Description_ ✍
 
 * __BaseModel__
 defines common attributes and methods for every other data field class
@@ -71,7 +71,7 @@ classes inherting from BaseModel and defining their public class attributes
         - `user_id`
         - `text`
 
-## **_Execution_** 🔐
+## _Execution_ 🔐
 
 The shell should look like this in interactive mode:
 
@@ -113,7 +113,7 @@ EOF  help  quit
 $
 ```
 
-## **_Implementation of the commands_** 🛠
+## _Implementation of the commands_ 🛠
 
 - `create` - creates a new instance of BaseModel, saves it to the JSON file and prints id
 
@@ -170,7 +170,7 @@ $
 [BaseModel] (3ddf7693-16a7-41da-8e24-b8395ad6506f) {'id': '3ddf7693-16a7-41da-8e24-b8395ad6506f', 'created_at': datetime.datetime(2023, 10, 9, 11, 10, 10, 751048), 'updated_at': datetime.datetime(2023, 10, 9, 11, 10, 10, 751101), 'first_name': '"Betty"'}
 ```
 
-## **_Testing_** 📋
+## _Testing_ 📋
 
 All files, classes and functions are tested with unit tests. 
 
@@ -180,7 +180,7 @@ Also the tests can be executed file by file, e.g. `python3 -m unittest tests/tes
 
 The tests should also pass in non-interactive mode using the command `echo "python3 -m unittest discover tests" | bash`
 
-## **_Authors_** ✍ 
+## _Authors_ ✍ 
 
-Chris Stephens <6673@holbertonstudents.com>
+Chris Stephens <6673@holbertonstudents.com><br />
 Svitlana Pavlovska <lanapavlovska90@gmail.com>
