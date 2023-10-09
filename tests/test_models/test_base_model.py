@@ -70,3 +70,19 @@ class TestInstatiationWithKwargs(unittest.TestCase):
         self.assertEqual(instance.id, "123")
         self.assertEqual(instance.created_at.isoformat(), expected_created_at)
         self.assertEqual(instance.updated_at.isoformat(), expected_updated_at)
+
+    def test_args(self):
+        """test possible args, non datetime arguments"""
+        instance_1 = BaseModel(name="Test", number=5)
+        self.assertEqual(instance_1.name, "Test")
+        self.assertEqual(instance_1.number, 5)
+
+    def test_kwargs_empty(self):
+        """test kwargs empty dictionary"""
+        instance_2 = BaseModel(**{})
+        self.assertEqual(instance_2.created_at, instance_2.updated_at)
+
+    def test_kwargs_None(self):
+        """test kwargs None"""
+        with self.assertRaises(TypeError):
+            BaseModel(id=None, created_at=None, updated_at=None)
