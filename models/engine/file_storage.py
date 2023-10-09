@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""File storage module"""
+"""This is the file storage module: it creates
+a new class"""
 import json
 from models.base_model import BaseModel
 from datetime import datetime
