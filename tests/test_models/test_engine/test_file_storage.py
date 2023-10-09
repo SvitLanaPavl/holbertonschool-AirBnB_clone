@@ -24,6 +24,10 @@ class TestFileStorageAttributes(unittest.TestCase):
         """testing for the class name"""
         self.assertEqual(type(storage).__name__, "FileStorage")
 
+    def test_class_type(self):
+        """testing the type of the class"""
+        self.assertEqual(type(FileStorage()), FileStorage)
+
     def test_file_path_type(self):
         """testing the type of the file path"""
         self.assertEqual(type(FileStorage._FileStorage__file_path), str)
@@ -69,6 +73,7 @@ class TestFileStorageMethods(unittest.TestCase):
     def test_new(self):
         """Testing new() method"""
         new_obj = BaseModel()
+        self.storage.new(new_obj)
         key = f"{new_obj.__class__.__name__}.{new_obj.id}"
         self.assertIn(key, self.storage.all())
 
