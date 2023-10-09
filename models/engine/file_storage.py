@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""File storage module"""
+"""This is the file storage module: it creates
+a new class"""
 import json
 from models.base_model import BaseModel
 from datetime import datetime
@@ -41,5 +42,5 @@ class FileStorage:
                     class_name = value["__class__"]
                     del value["__class__"]
                     self.new(eval(class_name)(**value))
-        except IOError:
+        except FileNotFoundError:
             pass
