@@ -89,7 +89,6 @@ class HBNBCommand(cmd.Cmd):
                     if "BaseModel" in key:
                         output_list.append(str(models.storage.all()[key]))
                 print(output_list)
-            
 
     def do_update(self, arg):
         """ This method updates or creates an attribute, the command format is:
