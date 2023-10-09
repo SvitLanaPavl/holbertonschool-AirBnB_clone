@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """ This module contains the definition for the 'User' Class """
-import base_model
+from models.base_model import BaseModel
 
 
-class User(base_model.BaseModel):
+class User(BaseModel):
     """ Class Definition for User Class, Subclass of BaseModel """
 
     email = ""

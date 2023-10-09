@@ -2,6 +2,12 @@
 """ This module contains the CLI-like
     command environment for data manipulation"""
 from models.base_model import BaseModel
+from models.user import User
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.amenity import Amenity
 from models.engine.file_storage import FileStorage
 import models
 import cmd
@@ -21,11 +27,12 @@ class HBNBCommand(cmd.Cmd):
         if arg_list is None or arg_list == []:
             print("** class name missing **")
             return
-        elif arg_list[0] != "BaseModel":
+        elif (arg_list[0] not in ["BaseModel", "User", "City",
+                                  "Place", "State", "Amenity", "Review"]):
             print("** class doesn't exist **")
             return
         else:
-            new_instance = BaseModel()
+            new_instance = eval(f"{arg_list[0]}()")
             new_instance.save()
             print(new_instance.id)
 
@@ -36,7 +43,8 @@ class HBNBCommand(cmd.Cmd):
         if arg_list is None or arg_list == []:
             print("** class name missing **")
             return
-        elif arg_list[0] != "BaseModel":
+        elif (arg_list[0] not in ["BaseModel", "User", "City",
+                                  "Place", "State", "Amenity", "Review"]):
             print("** class doesn't exist **")
             return
         elif len(arg_list) < 2:
@@ -56,7 +64,8 @@ class HBNBCommand(cmd.Cmd):
         if arg_list is None or arg_list == []:
             print("** class name missing **")
             return
-        elif arg_list[0] != "BaseModel":
+        elif (arg_list[0] not in ["BaseModel", "User", "City",
+                                  "Place", "State", "Amenity", "Review"]):
             print("** class doesn't exist **")
             return
         elif len(arg_list) < 2:
@@ -80,13 +89,14 @@ class HBNBCommand(cmd.Cmd):
                             models.storage.all().values()])
             print(output_list)
         else:
-            if arg_list[0] != "BaseModel":
+            if (arg_list[0] not in ["BaseModel", "User", "City",
+                                    "Place", "State", "Amenity", "Review"]):
                 print("** class doesn't exist **")
                 return
             else:
                 output_list = []
                 for key in models.storage.all():
-                    if "BaseModel" in key:
+                    if arg_list[0] in key:
                         output_list.append(str(models.storage.all()[key]))
                 print(output_list)
 
@@ -97,7 +107,8 @@ class HBNBCommand(cmd.Cmd):
         if arg_list is None or arg_list == []:
             print("** class name missing **")
             return
-        elif arg_list[0] != "BaseModel":
+        elif (arg_list[0] not in ["BaseModel", "User", "City",
+                                  "Place", "State", "Amenity", "Review"]):
             print("** class doesn't exist **")
             return
         elif len(arg_list) < 2:

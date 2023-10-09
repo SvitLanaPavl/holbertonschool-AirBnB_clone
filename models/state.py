@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """ This module contains the definition for the 'State' Class """
-import base_model
+from models.base_model import BaseModel
 
 
-class State(base_model.BaseModel):
+class State(BaseModel):
     """ Class Definition for State Class, Subclass of BaseModel """
 
     name = ""

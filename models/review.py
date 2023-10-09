@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """ This module contains the definition for the 'Review' Class """
-import base_model
+from models.base_model import BaseModel
 
 
-class Review(base_model.BaseModel):
+class Review(BaseModel):
     """ Class Definition for Review Class, Subclass of BaseModel """
 
     place_id = ""

@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """ This module contains the definition for the 'Place' Class """
-import base_model
+from models.base_model import BaseModel
 
 
-class Place(base_model.BaseModel):
+class Place(BaseModel):
     """ Class Definition for Place Class, Subclass of BaseModel """
 
     city_id = ""
