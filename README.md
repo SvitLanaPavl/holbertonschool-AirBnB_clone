@@ -10,3 +10,8 @@
 
 ## **_Implementation_** 🛠
 
+## **_How to use_** 🔐
+
+## **_Examples_** 🗃
+
+## **_Classes and their descriptions_** 📋
