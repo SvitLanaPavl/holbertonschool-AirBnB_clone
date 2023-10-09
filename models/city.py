@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 """ This module contains the definition for the 'City' Class """
-import base_model
+from models.base_model import BaseModel
 
 
-class City(base_model.BaseModel):
+class City(BaseModel):
     """ Class Definition for City Class, Subclass of BaseModel """
 
     state_id = ""
