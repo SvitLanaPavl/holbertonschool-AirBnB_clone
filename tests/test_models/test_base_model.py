@@ -52,3 +52,21 @@ class TestBaseModelInit(unittest.TestCase):
         self.assertEqual(b1_dict["id"], self.b1.id)
         with self.assertRaises(TypeError):
             self.b1.to_dict(1)
+
+    def test_new_instance_in_BM(self):
+        """testing if new instance is in BaseModel object"""
+        new_instance = BaseModel()
+        all_obj = models.storage.all().values()
+        self.assertIn(new_instance, all_obj)
+
+class TestInstatiationWithKwargs(unittest.TestCase):
+    """Testing instantiation with kwargs"""
+    def test_kwargs(self):
+        """testing kwargs"""
+        instance = BaseModel(id="123", created_at="2023-09-28T10:30:00.000000",\
+                             updated_at="2023-09-28T10:30:00.000000")
+        expected_created_at = "2023-09-28T10:30:00"
+        expected_updated_at = "2023-09-28T10:30:00"
+        self.assertEqual(instance.id, "123")
+        self.assertEqual(instance.created_at.isoformat(), expected_created_at)
+        self.assertEqual(instance.updated_at.isoformat(), expected_updated_at)
