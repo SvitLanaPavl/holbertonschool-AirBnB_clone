@@ -7,6 +7,8 @@ import models
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from datetime import datetime
+from models import storage
+
 
 class TestFileStorageAttributes(unittest.TestCase):
     """Testing basic instantiation and private class attributes"""
@@ -15,6 +17,16 @@ class TestFileStorageAttributes(unittest.TestCase):
         """trying to instantiate with args"""
         with self.assertRaises(TypeError):
             FileStorage(None)
+        with self.assertRaises(TypeError):
+            FileStorage(1)
+
+    def test_instantiation(self):
+        """testing for the class name"""
+        self.assertEqual(type(storage).__name__, "FileStorage")
+
+    def test_class_type(self):
+        """testing the type of the class"""
+        self.assertEqual(type(FileStorage()), FileStorage)
 
     def test_file_path_type(self):
         """testing the type of the file path"""
@@ -23,6 +35,7 @@ class TestFileStorageAttributes(unittest.TestCase):
     def test_objects_type(self):
         """testing the type of the file path"""
         self.assertEqual(type(FileStorage._FileStorage__objects), dict)
+
 
 class TestFileStorageMethods(unittest.TestCase):
     """Testing file storage methods"""
@@ -34,7 +47,6 @@ class TestFileStorageMethods(unittest.TestCase):
         FileStorage._FileStorage__file_path = self.temp_file
         self.storage = FileStorage()
         self.obj_1 = BaseModel()
-        self.obj_2 = BaseModel()
 
     @classmethod
     def tearDown(self):
@@ -47,21 +59,66 @@ class TestFileStorageMethods(unittest.TestCase):
         all_obj = self.storage.all()
         self.assertIsInstance(all_obj, dict)
         self.assertIn(self.obj_1, all_obj.values())
-        self.assertIn(self.obj_2, all_obj.values())
+
+    def test_all_None(self):
+        """testing new() by passing None"""
+        with self.assertRaises(TypeError):
+            self.storage.all(None)
+
+    def test_all_excess_args(self):
+        """testing new() by passing None"""
+        with self.assertRaises(TypeError):
+            self.storage.all(1)
 
     def test_new(self):
         """Testing new() method"""
         new_obj = BaseModel()
+        self.storage.new(new_obj)
         key = f"{new_obj.__class__.__name__}.{new_obj.id}"
         self.assertIn(key, self.storage.all())
 
-    """def test_save_and_relod(self):
-    Testing save() and reload() methods
+    def test_new_excess_args(self):
+        """testing new() by passing more args"""
+        with self.assertRaises(TypeError):
+            self.storage.new(BaseModel(), 1)
+
+    def test_new_None(self):
+        """testing new() by passing None"""
+        with self.assertRaises(AttributeError):
+            self.storage.new(None)
+
+    def test_save_and_reload(self):
+        """Testing save() and reload() methods"""
+        new_storage = BaseModel()
+        self.storage.new(new_storage)
         self.storage.save()
-        new = FileStorage()
-        new.reload()
-        self.assertIn(self.obj_1, new.all().keys())
-        self.assertIn(self.obj_2, new.all().keys())"""
+        text = ""
+        with open("temp_file.json", "r") as json_file:
+            text = json_file.read()
+            self.assertIn("BaseModel." + new_storage.id, text)
+        self.storage.reload()
+        obj = FileStorage._FileStorage__objects
+        self.assertIn("BaseModel." + new_storage.id, obj)
+
+    def test_save_args(self):
+        """testing save() method with arguments"""
+        with self.assertRaises(TypeError):
+            self.storage.save(1)
+
+    def test_save_None(self):
+        """testing save() method with passing None"""
+        with self.assertRaises(TypeError):
+            self.storage.save(None)
+
+    def test_reload_args(self):
+        """testing reload() method with arguments"""
+        with self.assertRaises(TypeError):
+            self.storage.reload(1)
+
+    def test_reload_None(self):
+        """testing reload() method with arguments"""
+        with self.assertRaises(TypeError):
+            self.storage.reload(None)
 
     if __name__ == "__main__":
         unittest.main()
