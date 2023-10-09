@@ -72,9 +72,9 @@ class TestFileStorageMethods(unittest.TestCase):
 
     def test_new(self):
         """Testing new() method"""
-        new_obj = BaseModel()
-        self.storage.new(new_obj)
-        key = f"{new_obj.__class__.__name__}.{new_obj.id}"
+        new_obj_bm = BaseModel()
+        self.storage.new(new_obj_bm)
+        key = f"{new_obj_bm.__class__.__name__}.{new_obj_bm.id}"
         self.assertIn(key, self.storage.all())
 
     def test_new_excess_args(self):
@@ -89,16 +89,16 @@ class TestFileStorageMethods(unittest.TestCase):
 
     def test_save_and_reload(self):
         """Testing save() and reload() methods"""
-        new_storage = BaseModel()
-        self.storage.new(new_storage)
+        new_storage_bm = BaseModel()
+        self.storage.new(new_storage_bm)
         self.storage.save()
         text = ""
         with open("temp_file.json", "r") as json_file:
             text = json_file.read()
-            self.assertIn("BaseModel." + new_storage.id, text)
+            self.assertIn("BaseModel." + new_storage_bm.id, text)
         self.storage.reload()
         obj = FileStorage._FileStorage__objects
-        self.assertIn("BaseModel." + new_storage.id, obj)
+        self.assertIn("BaseModel." + new_storage_bm.id, obj)
 
     def test_save_args(self):
         """testing save() method with arguments"""
