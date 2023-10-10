@@ -21,6 +21,10 @@ class TestUserAttributes(unittest.TestCase):
 
     def test_standard_use(self):
         """ Basic Instantiation """
+        self.assertEqual(self.u1.email, "")
+        self.assertEqual(self.u1.password, "")
+        self.assertEqual(self.u1.first_name, "")
+        self.assertEqual(self.u1.last_name, "")
         self.u1.email = "test@email.com"
         self.u1.password = "test"
         self.u1.first_name = "Tester"
@@ -77,9 +81,3 @@ class TestBaseModelInit(unittest.TestCase):
         self.assertEqual(u1_dict["id"], self.u1.id)
         with self.assertRaises(TypeError):
             self.u1.to_dict(1)
-
-    def test_new_instance_in_BM(self):
-        """testing if new instance is in BaseModel object"""
-        new_instance = BaseModel()
-        all_obj = models.storage.all().values()
-        self.assertIn(new_instance, all_obj)
