@@ -14,10 +14,7 @@ from models.amenity import Amenity
 class FileStorage:
     """Serializes instances to JSON file and
     deserializes JSON file to instances"""
-
-    # path to the JSON file
     __file_path = "file.json"
-    # dictionary that maps class names and id's
     __objects = {}
 
     def all(self):
@@ -31,7 +28,6 @@ class FileStorage:
 
     def save(self):
         """serializes __objects to the JSON file"""
-        # collects the serialized data of each object
         dict_obj = FileStorage.__objects
         j_dict_obj = {obj: dict_obj[obj].to_dict() for obj in dict_obj.keys()}
         with open(FileStorage.__file_path, "w") as json_file:
@@ -41,7 +37,6 @@ class FileStorage:
         """deserializes the JSON file to __objects"""
         try:
             with open(FileStorage.__file_path, "r") as json_file:
-                # stores the deserialized JSON data
                 dict_obj = json.load(json_file)
                 for value in dict_obj.values():
                     class_name = value["__class__"]
