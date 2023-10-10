@@ -9,7 +9,6 @@ from models.place import Place
 from models.review import Review
 from models.state import State
 from models.amenity import Amenity
-from datetime import datetime
 
 
 class FileStorage:
