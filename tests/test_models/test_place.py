@@ -56,7 +56,6 @@ class TestPlaceAttributes(unittest.TestCase):
         self.assertEqual(self.p1.amenity_ids, ["test"])
 
 
-
 class TestBaseModelInit(unittest.TestCase):
     """Testing basic instantiation and attribute assignment """
 
