@@ -63,7 +63,7 @@ class TestInstatiationWithKwargs(unittest.TestCase):
     """Testing instantiation with kwargs"""
     def test_kwargs(self):
         """testing kwargs"""
-        instance = BaseModel(id="123", created_at="2023-09-28T10:30:00.000000",\
+        instance = BaseModel(id="123", created_at="2023-09-28T10:30:00.000000",
                              updated_at="2023-09-28T10:30:00.000000")
         expected_created_at = "2023-09-28T10:30:00"
         expected_updated_at = "2023-09-28T10:30:00"
