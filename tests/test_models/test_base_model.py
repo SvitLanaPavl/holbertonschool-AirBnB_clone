@@ -59,6 +59,7 @@ class TestBaseModelInit(unittest.TestCase):
         all_obj = models.storage.all().values()
         self.assertIn(new_instance, all_obj)
 
+
 class TestInstatiationWithKwargs(unittest.TestCase):
     """Testing instantiation with kwargs"""
     def test_kwargs(self):
