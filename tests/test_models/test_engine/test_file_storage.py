@@ -3,9 +3,19 @@
 import json
 import os
 import unittest
+import models
+from datetime import datetime
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models import storage
+from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
+from models.user import User
+from models.state import State
+from models.place import Place
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
 
 
 class TestFileStorageAttributes(unittest.TestCase):
@@ -33,6 +43,10 @@ class TestFileStorageAttributes(unittest.TestCase):
     def test_objects_type(self):
         """testing the type of the file path"""
         self.assertEqual(type(FileStorage._FileStorage__objects), dict)
+
+    def test_storage_type(self):
+        """testing storage attribute type"""
+        self.assertEqual(type(models.storage), FileStorage)
 
 
 class TestFileStorageMethods(unittest.TestCase):
@@ -117,6 +131,7 @@ class TestFileStorageMethods(unittest.TestCase):
         """testing reload() method with arguments"""
         with self.assertRaises(TypeError):
             self.storage.reload(None)
+
 
 if __name__ == "__main__":
     unittest.main()
