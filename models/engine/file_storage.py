@@ -12,8 +12,12 @@ from models.amenity import Amenity
 
 
 class FileStorage:
-    """Serializes instances to JSON file and
-    deserializes JSON file to instances"""
+    """File Storage Engine Class Definition
+
+    Class Attributes:
+    __file_path: Data Storage Engine File Path
+    __objects: Dictionary of objects to serialize/deserialize
+    """
     __file_path = "file.json"
     __objects = {}
 
